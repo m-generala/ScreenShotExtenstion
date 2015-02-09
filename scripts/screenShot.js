@@ -3424,9 +3424,8 @@ document.onmouseup = function (e) {
     var mouseEndPosition = {
         x: e.clientX || e.pageX,
         y: e.clientY || e.pageY,
-    }
-
-    var width = Math.abs(mouseEndPosition.x - parseInt(mouseStartPosition.x.replace('px', ''))) + 'px',
+    },
+        width = Math.abs(mouseEndPosition.x - parseInt(mouseStartPosition.x.replace('px', ''))) + 'px',
         height = Math.abs(mouseEndPosition.y - parseInt(mouseStartPosition.y.replace('px', ''))) + 'px';
 
     mouseEndPosition.x += 'px';
@@ -3468,12 +3467,12 @@ document.onmouseup = function (e) {
 
     html2canvas(document.body, {
         onrendered: function (canvas) {
-            var img = document.createElement('img');
+            var img = document.createElement('img'),
+                newImage = document.createElement('img'),
+                canvasToClip = document.createElement('canvas'),
+                clippingContext = canvasToClip.getContext('2d');
 
             img.src = canvas.toDataURL();
-
-            var canvasToClip = document.createElement('canvas'),
-                clippingContext = canvasToClip.getContext('2d');
 
             intWidth = width.replace('px', '');
             intHeight = height.replace('px', '');
@@ -3490,19 +3489,16 @@ document.onmouseup = function (e) {
                 intHeight);
 
             clippingContext.save();
-            var newImage = document.createElement('img');
             newImage.src = canvasToClip.toDataURL();
-            document.location.href = canvasToClip.toDataURL();
             document.body.appendChild(newImage);
+
+            chrome.extension.sendMessage({
+                action: "getScrenShot",
+                img: canvasToClip.toDataURL(),
+            });
         }
     });
 }
-
-
-//parseInt(mouseStartPosition.x.replace('px', '')),
-//parseInt(mouseStartPosition.y.replace('px', '')),
-//intWidth,
-//intHeight
 
 
 

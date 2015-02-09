@@ -5,8 +5,7 @@ var id = 5;
 chrome.browserAction.onClicked.addListener(function () {
     chrome.extension.onMessage.addListener(function (request, sender) {
         if (request.action == "getScrenShot") {
-            // message.innerText = request.source;
-            //use request.source
+            alert(request.img);
         }
     });
 
