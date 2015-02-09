@@ -3395,9 +3395,7 @@
 
 //--------------------------------------------------------------------------------------------------------------------------
 
-var mouseStartPosition = {},
-    drawer = new jsGraphics();
-drawer.setColor("#00ff00");
+var mouseStartPosition = {};
 
 document.onmousedown = function (e) {
     mouseStartPosition.x = (e.clientX || e.pageX) + 'px';
@@ -3450,7 +3448,7 @@ document.onmouseup = function (e) {
         width: width,
         height: '1px'
     });
-    // bottom
+    // bottom div
     document.body.appendChild(div);
     div = createDiv({
         left: mouseStartPosition.x,
@@ -3459,7 +3457,7 @@ document.onmouseup = function (e) {
         height: '1px'
     });
     document.body.appendChild(div);
-    // right
+    // right div
     div = createDiv({
         left: mouseEndPosition.x,
         top: mouseStartPosition.y,
@@ -3467,4 +3465,44 @@ document.onmouseup = function (e) {
         height: height
     });
     document.body.appendChild(div);
+
+    html2canvas(document.body, {
+        onrendered: function (canvas) {
+            var img = document.createElement('img');
+
+            img.src = canvas.toDataURL();
+
+            var canvasToClip = document.createElement('canvas'),
+                clippingContext = canvasToClip.getContext('2d');
+
+            intWidth = width.replace('px', '');
+            intHeight = height.replace('px', '');
+            canvasToClip.width = img.width;
+            canvasToClip.height = img.height;
+            clippingContext.drawImage(img,
+                parseInt(mouseStartPosition.x.replace('px', '')),
+                parseInt(mouseStartPosition.y.replace('px', '')),
+                intWidth,
+                intHeight,
+                parseInt(mouseStartPosition.x.replace('px', '')),
+                parseInt(mouseStartPosition.y.replace('px', '')),
+                intWidth,
+                intHeight);
+
+            clippingContext.save();
+            var newImage = document.createElement('img');
+            newImage.src = canvasToClip.toDataURL();
+            document.location.href = canvasToClip.toDataURL();
+            document.body.appendChild(newImage);
+        }
+    });
 }
+
+
+//parseInt(mouseStartPosition.x.replace('px', '')),
+//parseInt(mouseStartPosition.y.replace('px', '')),
+//intWidth,
+//intHeight
+
+
+
