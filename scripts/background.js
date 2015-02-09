@@ -3,8 +3,15 @@ var id = 5;
 
 // Listen for a click on the camera icon. On that click, take a screenshot.
 chrome.browserAction.onClicked.addListener(function () {
+    chrome.extension.onMessage.addListener(function (request, sender) {
+        if (request.action == "getScrenShot") {
+            // message.innerText = request.source;
+            //use request.source
+        }
+    });
+
     chrome.tabs.executeScript(null, {
-        file: "popup.js"
+        file: "scripts/screenShot.js"
     }, function () {
         // If you try and inject into an extensions page or the webstore/NTP you'll get an error
         if (chrome.extension.lastError) {
