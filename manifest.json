@@ -13,7 +13,10 @@
   "permissions": [
     "activeTab",
     "tabs",
-    "<all_urls>"
+    "<all_urls>",
+	"storage",
+	"declarativeWebRequest"
   ],
-  "manifest_version": 2
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://www.dropbox.com; object-src 'self'"
 } 
