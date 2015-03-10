@@ -1,4 +1,4 @@
-﻿/// <reference path="jquery-1.11.2.js" />
+﻿// <reference path="jquery-1.11.2.js" />
 var id = 5;
 
 // Listen for a click on the camera icon. On that click, take a screenshot.
@@ -15,7 +15,7 @@ if(!addedOuterListeners) {
 						chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
 							if (changeInfo.status == "complete" && tabId == selfTabId) {
 								var tabs = chrome.extension.getViews({ type: "tab" });
-								tabs[0].placePicture(request.img);
+								tabs[tabs.length - 1].placePicture(request.img);
 							}
 						});
 					});
