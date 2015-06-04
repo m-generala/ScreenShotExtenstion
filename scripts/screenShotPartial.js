@@ -1,7 +1,6 @@
 ﻿(function() {
 	var mouseStartPosition = {},
 		moveStarted = false;
-
 	document.onmousedown = function (e) {
 		moveStarted = !moveStarted;
 		mouseStartPosition.x = (e.clientX || e.pageX) + 'px';
@@ -92,41 +91,6 @@
         
 		mouseEndPosition.x += 'px';
 		mouseEndPosition.y += 'px';
-        //
-		//console.log(width);
-		//// left div
-		//var div = createDiv({
-		//	left: mouseStartPosition.x,
-		//	top: mouseStartPosition.y,
-		//	width: '1px',
-		//	height: height
-		//});
-		//// top div
-		//document.body.appendChild(div);
-		//div = createDiv({
-		//	left: mouseStartPosition.x,
-		//	top: mouseStartPosition.y,
-		//	width: width,
-		//	height: '1px'
-		//});
-		//// bottom div
-		//document.body.appendChild(div);
-		//div = createDiv({
-		//	left: mouseStartPosition.x,
-		//	top: mouseEndPosition.y,
-		//	width: width,
-		//	height: '1px'
-		//});
-		//document.body.appendChild(div);
-		//// right div
-		//div = createDiv({
-		//	left: mouseEndPosition.x,
-		//	top: mouseStartPosition.y,
-		//	width: '1px',
-		//	height: height
-		//});
-		//document.body.appendChild(div);
-
 		html2canvas(document.body, {
 			onrendered: function (canvas) {
 				var canvasToClip = document.createElement('canvas'),

@@ -12,12 +12,12 @@ if (!addedInnerListener) {
                 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
                     if (changeInfo.status == "complete" && tabId == selfTabId) {
                         var tabs = chrome.extension.getViews({ type: "tab" });
-                        alert(request.img);
                         tabs[tabs.length - 1].placePicture(request.img);
                     }
                 });
             });
         }
     });
+
     addedInnerListener = !addedInnerListener;
 }
